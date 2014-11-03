@@ -354,7 +354,7 @@ update_doc(#httpdb{} = HttpDb, #doc{id = DocId} = Doc, Options, Type) ->
         JsonBytes, Doc#doc.atts, true),
     Headers = case lists:member(delay_commit, Options) of
     true ->
-        [{"X-Couch-Full-Commit", "false"}];
+        [{"X-CouchDB-Full-Commit", "false"}];
     false ->
         []
     end ++ [{"Content-Type", ?b2l(ContentType)}, {"Content-Length", Len}],
@@ -427,7 +427,7 @@ update_docs(#httpdb{} = HttpDb, DocList, Options, UpdateType) ->
     Headers = [
         {"Content-Length", Len},
         {"Content-Type", "application/json"},
-        {"X-Couch-Full-Commit", FullCommit}
+        {"X-CouchDB-Full-Commit", FullCommit}
     ],
     send_req(
         HttpDb,
